@@ -52,7 +52,6 @@ body {
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   z-index: 2;
-  <div id="hearts-container"></div>
   transition: transform 0.2s ease;
 }
   /* crack animation */
@@ -155,13 +154,13 @@ button {
 </head>
 
 <body>
-  <audio id="popSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
 
 <div class="envelope" onclick="openLetter()">
 
   <div class="flap"></div>
   <div class="seal"></div>
-
+<div id="hearts-container"></div>
   <div class="letter" id="letter">
 
     <div class="polaroid">
@@ -203,22 +202,17 @@ Nupoor.
 
   </div>
 
-</div>
 <script>
 function openLetter() {
-  try {
-    document.querySelector('.flap').style.transform = "rotateX(180deg)";
-    document.getElementById('letter').style.transform = "translateY(0)";
+  let flap = document.querySelector('.flap');
+  let letter = document.getElementById('letter');
+  let seal = document.querySelector('.seal');
 
-    // hide seal safely
-    let seal = document.querySelector('.seal');
-    if (seal) seal.style.display = "none";
+  if (flap) flap.style.transform = "rotateX(180deg)";
+  if (letter) letter.style.transform = "translateY(0)";
+  if (seal) seal.style.display = "none";
 
-    // optional hearts
-    createHearts();
-  } catch (e) {
-    console.log("Error:", e);
-  }
+  createHearts();
 }
 
 function showSecret() {
@@ -232,33 +226,25 @@ function createHearts() {
 
   for (let i = 0; i < 10; i++) {
     let heart = document.createElement("div");
-    heart.className = "heart";
     heart.innerHTML = "❤";
-
     heart.style.position = "absolute";
-    heart.style.left = "0px";
-    heart.style.top = "0px";
+    heart.style.left = "0";
+    heart.style.top = "0";
+    heart.style.color = "#ff4d6d";
 
-    let x = (Math.random() - 0.5) * 200 + "px";
-    let y = (Math.random() - 0.5) * 200 + "px";
+    let x = (Math.random() - 0.5) * 200;
+    let y = (Math.random() - 0.5) * 200;
 
-    heart.style.transform = `translate(${x}, ${y})`;
+    heart.style.transform = `translate(${x}px, ${y}px)`;
+    heart.style.transition = "0.8s";
     heart.style.opacity = "0";
-    heart.style.transition = "all 0.8s ease";
 
     container.appendChild(heart);
 
-    setTimeout(() => {
-      heart.style.opacity = "1";
-    }, 10);
-
-    setTimeout(() => {
-      heart.remove();
-    }, 800);
+    setTimeout(() => heart.remove(), 800);
   }
 }
 </script>
-
 
 </body>
 </html>
