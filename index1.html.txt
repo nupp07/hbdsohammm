@@ -1,0 +1,185 @@
+index1.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  background: #1a1a1a;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Envelope full screen */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #ffc0cb;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Flap */
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: #ff9eb5;
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  transition: 0.6s;
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
+/* Wax seal */
+.seal {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #b3003b, #80002a);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  z-index: 2;
+}
+
+/* Letter */
+.letter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #fffaf5;
+  top: 0;
+  left: 0;
+  padding: 30px 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+
+  transform: translateY(100%);
+  transition: 0.6s ease;
+}
+
+/* Heading */
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 42px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Text */
+p {
+  font-size: 18px;
+  line-height: 1.8;
+  text-align: left;
+}
+
+/* Polaroid */
+.polaroid {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 110px;
+  background: white;
+  padding: 8px 8px 20px 8px;
+  transform: rotate(6deg);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.polaroid img {
+  width: 100%;
+}
+
+/* Button */
+button {
+  margin-top: 15px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #ff9eb5;
+  cursor: pointer;
+}
+
+/* Secret text */
+#secret {
+  display: none;
+  margin-top: 10px;
+  font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="openLetter()">
+
+  <div class="flap"></div>
+  <div class="seal"></div>
+
+  <div class="letter" id="letter">
+
+    <div class="polaroid">
+      <img src="PASTE-YOUR-IMAGE-LINK-HERE">
+    </div>
+
+    <h1>Happy Birthday 💗</h1>
+<p>
+
+HAPPY 20TH!!!🤍
+As i write or rather, type this letter, all that flashes in front of my eyes are the moments we spent together, from talking on instagram to talking on phone calls to shifting to video calls to being a couple to actually seeing each other and spending time with each other.
+From the very beginning, things have felt just right with you. I’ve said this multiple times, but when i met you, i was a person who wanted nothing else in life besides the people i already had.
+I have no clue how you got added to those people.
+Today not only is it your birthday, it is also our one month anniversary (😛) 
+I really cannot comprehend how its only been a month when in actuality it feels like a whole year has passed
+You truly are my 11:11, I could have asked for nothing more in my partner.
+I really do count you as a blessing, a person who entered my life and made me realise it was okay for me to rely on someone (you) and depend on them for things no matter how big or small they are
+I will always wish the best for you and constantly pray for your happiness.
+I hope i can become someone you too, can rely on and turn to no matter how big or small turns your life takes
+I hope you can confide in me and turn to me whenever you need because i will always be here, now and even 60 years later, when we’re all old and wrinkly and cranky and hard of hearing.
+I am so excited for the life we will build together in the near future and i know that with you, everything will be just right.
+With that being said, I hope you finally start paying attention to your health and stop neglecting it. 
+I hope you’re happy and when you’re sad, i hope you find the strength to fight through the things that are bothering you. 
+Stay happy and healthy, always.🩶
+
+Happiest Birthday Soham,
+I love you beyond words can express.
+
+With love,
+Nupoor.
+
+    </p>
+
+    <button onclick="showSecret()">click :p</button>
+
+    <p id="secret">
+      also, happy one month to us!💕
+    </p>
+
+  </div>
+
+</div>
+
+<script>
+function openLetter() {
+  document.querySelector('.flap').style.transform = "rotateX(180deg)";
+  document.getElementById('letter').style.transform = "translateY(0)";
+}
+
+function showSecret() {
+  document.getElementById("secret").style.display = "block";
+}
+</script>
+
+</body>
+</html>
