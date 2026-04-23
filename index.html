@@ -155,6 +155,7 @@ button {
 </head>
 
 <body>
+  <audio id="popSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
 
 <div class="envelope" onclick="openLetter()">
 
@@ -203,49 +204,53 @@ Nupoor.
   </div>
 
 </div>
-
 <script>
 function openLetter() {
-  let seal = document.querySelector('.seal');
-
-  // crack effect
-  seal.classList.add('crack');
-
-  // play pop sound
-  document.getElementById("popSound").play();
-
-  setTimeout(() => {
-    // explode hearts
-    createHearts();
-
-    // hide seal
-    seal.style.display = "none";
-
-    // open envelope
+  try {
     document.querySelector('.flap').style.transform = "rotateX(180deg)";
     document.getElementById('letter').style.transform = "translateY(0)";
-  }, 200);
+
+    // hide seal safely
+    let seal = document.querySelector('.seal');
+    if (seal) seal.style.display = "none";
+
+    // optional hearts
+    createHearts();
+  } catch (e) {
+    console.log("Error:", e);
+  }
 }
 
 function showSecret() {
-  document.getElementById("secret").style.display = "block";
+  let secret = document.getElementById("secret");
+  if (secret) secret.style.display = "block";
 }
 
 function createHearts() {
-  const container = document.getElementById("hearts-container");
+  let container = document.getElementById("hearts-container");
+  if (!container) return;
 
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 10; i++) {
     let heart = document.createElement("div");
     heart.className = "heart";
     heart.innerHTML = "❤";
 
-    let x = (Math.random() - 0.5) * 220 + "px";
-    let y = (Math.random() - 0.5) * 220 + "px";
+    heart.style.position = "absolute";
+    heart.style.left = "0px";
+    heart.style.top = "0px";
 
-    heart.style.setProperty('--x', x);
-    heart.style.setProperty('--y', y);
+    let x = (Math.random() - 0.5) * 200 + "px";
+    let y = (Math.random() - 0.5) * 200 + "px";
+
+    heart.style.transform = `translate(${x}, ${y})`;
+    heart.style.opacity = "0";
+    heart.style.transition = "all 0.8s ease";
 
     container.appendChild(heart);
+
+    setTimeout(() => {
+      heart.style.opacity = "1";
+    }, 10);
 
     setTimeout(() => {
       heart.remove();
@@ -253,6 +258,7 @@ function createHearts() {
   }
 }
 </script>
-<audio id="popSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
+
+
 </body>
 </html>
