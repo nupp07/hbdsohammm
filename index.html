@@ -52,6 +52,15 @@ body {
   border-radius: 50%;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   z-index: 2;
+  <div id="hearts-container"></div>
+  transition: transform 0.2s ease;
+}
+  /* crack animation */
+
+.crack {
+
+  transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+
 }
 
 /* Letter */
@@ -78,11 +87,12 @@ h1 {
   margin-bottom: 10px;
 }
 
-/* Text */
 p {
-  font-size: 18px;
+  font-family: 'Allura', cursive;
+  font-size: 22px;
   line-height: 1.8;
   text-align: left;
+  letter-spacing: 1px;
 }
 
 /* Polaroid */
@@ -110,6 +120,30 @@ button {
   background: #ff9eb5;
   cursor: pointer;
 }
+ #hearts-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 14px;
+  animation: explode 0.8s ease forwards;
+}
+
+@keyframes explode {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.5);
+    opacity: 0;
+  }
+} 
 
 /* Secret text */
 #secret {
@@ -138,21 +172,21 @@ button {
 
 HAPPY 20TH!!!🤍
 As i write or rather, type this letter, all that flashes in front of my eyes are the moments we spent together, from talking on instagram to talking on phone calls to shifting to video calls to being a couple to actually seeing each other and spending time with each other.
-From the very beginning, things have felt just right with you. I’ve said this multiple times, but when i met you, i was a person who wanted nothing else in life besides the people i already had.
-I have no clue how you got added to those people.
+<br>From the very beginning, things have felt just right with you. I’ve said this multiple times, but when i met you, i was a person who wanted nothing else in life besides the people i already had.
+I have no clue how you got added to those people. <br><br>
 Today not only is it your birthday, it is also our one month anniversary (😛) 
-I really cannot comprehend how its only been a month when in actuality it feels like a whole year has passed
-You truly are my 11:11, I could have asked for nothing more in my partner.
-I really do count you as a blessing, a person who entered my life and made me realise it was okay for me to rely on someone (you) and depend on them for things no matter how big or small they are
-I will always wish the best for you and constantly pray for your happiness.
-I hope i can become someone you too, can rely on and turn to no matter how big or small turns your life takes
+I really cannot comprehend how its only been a month when in actuality it feels like a whole year has passed.
+<br>You truly are my 11:11, I could have asked for nothing more in my partner. <br>
+I really do count you as a blessing, a person who entered my life and made me realise it was okay for me to rely on someone (you) and depend on them for things no matter how big or small they are.
+<br><br>I will always wish the best for you and constantly pray for your happiness.<br><br>
+I hope i can become someone you too, can rely on and turn to no matter how big or small turns your life takes.
 I hope you can confide in me and turn to me whenever you need because i will always be here, now and even 60 years later, when we’re all old and wrinkly and cranky and hard of hearing.
 I am so excited for the life we will build together in the near future and i know that with you, everything will be just right.
-With that being said, I hope you finally start paying attention to your health and stop neglecting it. 
+<br><br>With that being said, I hope you finally start paying attention to your health and stop neglecting it. 
 I hope you’re happy and when you’re sad, i hope you find the strength to fight through the things that are bothering you. 
-Stay happy and healthy, always.🩶
+<br><br>Stay happy and healthy, always.🩶<br><br>
 
-Happiest Birthday Soham,
+<br><br>Happiest Birthday Soham,
 I love you beyond words can express.
 
 With love,
@@ -172,14 +206,53 @@ Nupoor.
 
 <script>
 function openLetter() {
-  document.querySelector('.flap').style.transform = "rotateX(180deg)";
-  document.getElementById('letter').style.transform = "translateY(0)";
+  let seal = document.querySelector('.seal');
+
+  // crack effect
+  seal.classList.add('crack');
+
+  // play pop sound
+  document.getElementById("popSound").play();
+
+  setTimeout(() => {
+    // explode hearts
+    createHearts();
+
+    // hide seal
+    seal.style.display = "none";
+
+    // open envelope
+    document.querySelector('.flap').style.transform = "rotateX(180deg)";
+    document.getElementById('letter').style.transform = "translateY(0)";
+  }, 200);
 }
 
 function showSecret() {
   document.getElementById("secret").style.display = "block";
 }
-</script>
 
+function createHearts() {
+  const container = document.getElementById("hearts-container");
+
+  for (let i = 0; i < 14; i++) {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤";
+
+    let x = (Math.random() - 0.5) * 220 + "px";
+    let y = (Math.random() - 0.5) * 220 + "px";
+
+    heart.style.setProperty('--x', x);
+    heart.style.setProperty('--y', y);
+
+    container.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 800);
+  }
+}
+</script>
+<audio id="popSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3"></audio>
 </body>
 </html>
